@@ -11,7 +11,7 @@ void InisializeSetting::initialize() {
 
 void InisializeSetting::_setConstantValues() {
 	constants.per_cell = 5.6;
-	constants.Vmax = 5;
+	//constants.Vmax = 5;
 	constants.G = 15;
 	constants.S = 2;
 	constants.r = 0.99;
@@ -24,14 +24,27 @@ void InisializeSetting::_setConstantValues() {
 
 void InisializeSetting::_setInitializePosition() {
 	std::vector<int> rem(L);
+	constants.Vmax = std::vector<int>(N, 0);
+	std::vector<int> tempVmaxdist(N, 0);
+	for (int i = 0; i < N; i++) {
+		if (i % 3 == 0) tempVmaxdist[i] == 4;
+		else if (i % 3 == 1) tempVmaxdist[i] == 5;
+		else tempVmaxdist[i] == 6;
+	}
 	for (int i = 0; i < L; i++) rem[i] = i;
 	for (int i = 0; i < N; i++) {
+		int tempVmax_size = tempVmaxdist.size() - 1;
 		int rem_size = rem.size() - 1;
 		int xrem = random->random(rem_size);
+		int pickup_Vmax = random->random(tempVmax_size);
+		int assignedVmax = tempVmaxdist[pickup_Vmax];
 		int p = rem[xrem];
 		std::iter_swap(rem.begin() + xrem, rem.end() - 1);
+		std::iter_swap(tempVmaxdist.begin() + pickup_Vmax, tempVmaxdist.end() - 1);
 		rem.pop_back();
+		tempVmaxdist.pop_back();
 		map.existance[p] = true;
+		constants.Vmax[i] = assignedVmax;
 	}
 	int maxDistance = -1;
 	int frontPosition = map.existance.size();
