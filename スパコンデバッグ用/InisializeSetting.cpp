@@ -27,9 +27,9 @@ void InisializeSetting::_setInitializePosition() {
 	constants.Vmax = std::vector<int>(N, 0);
 	std::vector<int> tempVmaxdist(N, 0);
 	for (int i = 0; i < N; i++) {
-		if (i % 3 == 0) tempVmaxdist[i] == 4;
-		else if (i % 3 == 1) tempVmaxdist[i] == 5;
-		else tempVmaxdist[i] == 6;
+		if (i % 3 == 0) tempVmaxdist[i] = 4;
+		else if (i % 3 == 1) tempVmaxdist[i] = 5;
+		else tempVmaxdist[i] = 6;
 	}
 	for (int i = 0; i < L; i++) rem[i] = i;
 	for (int i = 0; i < N; i++) {
